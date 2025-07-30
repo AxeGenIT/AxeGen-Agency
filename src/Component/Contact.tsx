@@ -47,10 +47,10 @@ const ContactPage = () => {
         <div className="container mx-auto max-w-7xl relative z-10 text-center">
           <div className="glass-strong rounded-3xl p-12 max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              Let's <span className="text-gradient-cyan">Connect</span>
+              Let&apos;s <span className="text-gradient-cyan">Connect</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-              Ready to transform your digital presence? Let's discuss your project and create something extraordinary together.
+              Ready to transform your digital presence? Let&apos;s discuss your project and create something extraordinary together.
             </p>
           </div>
         </div>
