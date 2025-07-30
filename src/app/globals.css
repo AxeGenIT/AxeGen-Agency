@@ -3,7 +3,7 @@
 All colors MUST be HSL.
 */
 
-@layer base {
+ 
   :root {
     --background: 222 47% 5%;
     --foreground: 180 100% 95%;
@@ -77,18 +77,12 @@ All colors MUST be HSL.
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  /* .dark {
  
-  } */
-}
 
-@layer base {
-  * {
-    @apply border-border;
-  }
+
 
   body {
-    @apply bg-background text-foreground;
+   
     background: var(--gradient-bg);
     min-height: 100vh;
     overflow-x: hidden;
@@ -154,4 +148,88 @@ All colors MUST be HSL.
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+.text-muted-foreground
+ 
+ {
+    color: hsl(var(--muted-foreground));
 }
+.leading-tight {
+    line-height: 1.25;
+}
+.text-primary
+ {
+    color: hsl(var(--primary));
+}
+.border-primary-30
+ 
+ {
+    border-color: hsl(var(--primary) / 0.3);
+}
+.animate-scale-in
+ {
+    animation: scale-in 0.5s ease-out;
+}
+.animate-slide-up
+ {
+    animation: slide-up 0.6s ease-out;
+}
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+.border-primary-50
+ 
+ {
+    border-color: hsl(var(--primary) / 0.5);
+}
+.bg-primary
+ 
+ {
+    background-color: hsl(var(--primary));
+}
+.animate-pulse-glow
+ 
+ {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+
+
+
+
+/* animations */
+@keyframes scale-up {
+0% {
+    transform: translateY(100px);
+    opacity: 0;
+}
+
+100% {
+    transform: translateY(0);
+    opacity: 1;
+}
+}
+
+@keyframes pulse-glow {
+0%, 100% {
+    opacity: 1;
+}
+
+ 
+50% {
+    opacity: 0.5;
+}
+}
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+}
+
+ 
+50% {
+    transform: translateY(-20px);
+}
+}
+.bg-primary-90 {
+    background-color: hsl(var(--primary) / 0.9);
+}
+ 
