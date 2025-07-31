@@ -76,7 +76,7 @@ const ClientReviews = () => {
 
           {/* Custom Navigation */}
           <div className="flex justify-center gap-4 mt-8">
-            <button className="review-prev p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors">
+            <button className="review-prev p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors border-[#29293d] border hover:border-[#00ffff66]">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
@@ -84,7 +84,7 @@ const ClientReviews = () => {
             
             <div className="review-pagination flex gap-2 items-center" />
             
-            <button className="review-next p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors">
+            <button className="review-next p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors border-[#29293d] border hover:border-[#00ffff66]">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
