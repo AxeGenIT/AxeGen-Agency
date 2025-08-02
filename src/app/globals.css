@@ -115,7 +115,11 @@ All colors MUST be HSL.
   .glow-purple {
     box-shadow: var(--glow-purple);
   }
-  
+.border-primary-30
+ 
+ {
+    border-color: hsl(var(--primary) / 0.3);
+}
   /* Animated background gradients */
   .bg-gradient-animated {
     background: linear-gradient(-45deg, 
@@ -161,10 +165,25 @@ All colors MUST be HSL.
     color: hsl(var(--primary));
 }
 .border-primary-30
- 
- {
+{
     border-color: hsl(var(--primary) / 0.3);
 }
+.text-card-foreground {
+    color: hsl(var(--card-foreground));
+}
+.bg-card {
+    background-color: hsl(var(--card));
+}
+.border-primary-20
+ {
+    border-color: hsl(var(--primary) / 0.2);
+}
+.shadow-sm {
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+ 
 .animate-scale-in
  {
     animation: scale-in 0.5s ease-out;
@@ -185,6 +204,18 @@ All colors MUST be HSL.
  
  {
     background-color: hsl(var(--primary));
+}
+.border-primary-20 {
+    border-color: hsl(var(--primary) / 0.2);
+}
+.border-primary-40
+ {
+    border-color: hsl(var(--primary) / 0.4);
+}
+.border-primary-10
+ 
+ {
+    border-color: hsl(var(--primary) / 0.1);
 }
 .animate-pulse-glow
  

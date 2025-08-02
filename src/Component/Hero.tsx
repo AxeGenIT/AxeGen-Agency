@@ -36,8 +36,8 @@ const Hero = () => {
         {/* Main Headline */}
         <h1 className="text-6xl max-[380px]:text-[40px] max-[419px]:text-5xl md:text-8xl font-black mb-8 leading-tight animate-slide-up text-[#E6FFFF]">
           <span className="block ">Building</span>
-          <span className="text-gradient-cyan block ">Tomorrow's</span>
-          <span className="block ">Digital World</span>
+          <span className="text-gradient-cyan block -mt-2.5">Tomorrow's</span>
+          <span className="block -mt-2.5">Digital World</span>
         </h1>
         
         {/* Subheadline */}

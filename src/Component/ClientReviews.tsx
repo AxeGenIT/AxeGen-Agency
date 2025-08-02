@@ -8,19 +8,66 @@ import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
 import ReviewCard from "@/Component/UI/ReviewCard";
 import { reviews } from "@/utils/data";
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 const ClientReviews = () => {
+    const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { 
+        duration: 0.6, 
+        ease: "easeOut",
+        type: "spring" as const,
+        damping: 12,
+        stiffness: 100
+      }
+    }
+  };
   return (
-    <section className="py-12 bg-gradient-to-b from-gray-900 to-gray-800">
+    <section ref={ref} className="py-12 bg-gradient-to-br from-slate-900 to-indigo-950 backdrop-blur-lg rounded-2xl border border-slate-700/50 shadow-2xl bg-fixed">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">
-            Trusted by Thousands
-          </h2>
-          <p className="mt-4 text-xl text-gray-300">
+         
+        <motion.div 
+          className="text-center mb-16"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold mb-4 text-white"
+            variants={itemVariants}
+          >
+            Trusted by <span className="text-cyan-400">Thousands</span>
+          </motion.h2>
+          <motion.p 
+            className="text-lg text-slate-300 max-w-2xl mx-auto"
+            variants={itemVariants}
+          >
             Don&apos;t just take our word for it - hear what our clients say
-          </p>
-        </div>
+          </motion.p>
+          <motion.div 
+            className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto mt-6 rounded-full"
+            variants={itemVariants}
+          />
+        </motion.div>
 
         <Swiper
           modules={[EffectCoverflow, Pagination, Navigation]}

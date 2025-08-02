@@ -1,406 +1,249 @@
-"use client";
-import React, { useState } from "react";
-import { useToast } from "../Hooks/use-toast";
-import { Button } from "@/Component/UI/Button";
-import { Input } from "@/Component/UI/Input";
-import { Textarea } from "@/Component/UI/Textarea";
-import { Card, CardContent } from "@/Component/UI/Card";
-import Navigation from "@/Component/Navbar";
-import Footer from "@/Component/Footer";
+// app/page.tsx
+'use client';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
-const ContactPage = () => {
+const CollaborationPage = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
-    project: '',
-    message: ''
+    projectType: '',
+    details: ''
   });
-  const { toast } = useToast();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message Sent! 🚀",
-      description: "We'll get back to you within 24 hours to discuss your project.",
+    alert('Form submitted successfully! We\'ll be in touch soon.');
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      projectType: '',
+      details: ''
     });
-    setFormData({ name: '', email: '', project: '', message: '' });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
   };
 
   return (
-    <div className="min-h-screen bg-gradient-animated">
-      <Navigation />
-      
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 px-6 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-        </div>
-        
-        <div className="container mx-auto max-w-7xl relative z-10 text-center">
-          <div className="glass-strong rounded-3xl p-12 max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              Let&apos;s <span className="text-gradient-cyan">Connect</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-              Ready to transform your digital presence? Let&apos;s discuss your project and create something extraordinary together.
-            </p>
-          </div>
-        </div>
-      </section>
-      
-      {/* Contact Section */}
-      <section className="py-16 px-6">
-        <div className="container mx-auto max-w-7xl">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Contact Form */}
-            <Card className="glass-strong border-primary/20">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-6 text-gradient-cyan">Start Your Project</h3>
-                
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Name</label>
-                      <Input
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="glass border-primary/30 focus:border-primary"
-                        placeholder="Your name"
-                        required
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Email</label>
-                      <Input
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="glass border-primary/30 focus:border-primary"
-                        placeholder="your@email.com"
-                        required
-                      />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Project Type</label>
-                    <Input
-                      name="project"
-                      value={formData.project}
-                      onChange={handleChange}
-                      className="glass border-primary/30 focus:border-primary"
-                      placeholder="Website, App, CMS, Marketing..."
-                      required
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Project Details</label>
-                    <Textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      className="glass border-primary/30 focus:border-primary min-h-32"
-                      placeholder="Tell us about your vision, goals, and requirements..."
-                      required
-                    />
-                  </div>
-                  
-                  <Button 
-                    type="submit" 
-                    size="lg" 
-                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground glow-cyan transition-all duration-300 hover:scale-105"
-                  >
-                    Send Message 🚀
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-indigo-950 text-white">
+      {/* Header */}
+      <header className="py-12 px-4 max-w-7xl mx-auto text-center">
+        <motion.h1 
+          className="text-4xl md:text-5xl font-bold mb-6"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Ready to <span className="text-cyan-400">Collaborate</span>?
+        </motion.h1>
+        <motion.p 
+          className="text-xl text-slate-300 max-w-2xl mx-auto"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          Let's discuss your project and create something extraordinary together
+        </motion.p>
+        <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto mt-6 rounded-full"></div>
+      </header>
+
+      <div className="max-w-7xl mx-auto px-4 pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Left Column - Form */}
+          <motion.div 
+            className="bg-slate-800/50 backdrop-blur-lg rounded-2xl border border-slate-700/50 p-8 shadow-2xl"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+          >
+            <h2 className="text-2xl font-bold mb-6 text-cyan-400">Start Your Project</h2>
             
-            {/* Contact Info */}
-            <div className="space-y-8">
-              {/* Why Choose Us */}
-              <Card className="glass-strong border-accent/20 glow-purple">
-                <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold mb-6 text-gradient-accent">Why Partner With Axegen?</h3>
-                  
-                  <div className="space-y-6">
-                    <div className="flex items-start space-x-4">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-3 glow-cyan" />
-                      <div>
-                        <h4 className="font-semibold text-lg">5+ Years of Excellence</h4>
-                        <p className="text-muted-foreground">Proven track record in delivering high-impact digital solutions</p>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block text-slate-300 mb-2">Name</label>
+                <div className="flex gap-4">
+                  <div className="flex-1">
+                    <input 
+                      type="text" 
+                      name="firstName"
+                      placeholder="First name"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                      required
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <input 
+                      type="text" 
+                      name="lastName"
+                      placeholder="Last name"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-slate-300 mb-2">Email</label>
+                <input 
+                  type="email" 
+                  name="email"
+                  placeholder="your@email.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                  required
+                />
+              </div>
+              
+              <div>
+                <label className="block text-slate-300 mb-2">Project Type</label>
+                <select 
+                  name="projectType"
+                  value={formData.projectType}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                  required
+                >
+                  <option value="">Select project type</option>
+                  <option value="website">Website</option>
+                  <option value="app">Mobile App</option>
+                  <option value="cms">CMS Development</option>
+                  <option value="marketing">Marketing Campaign</option>
+                  <option value="design">UI/UX Design</option>
+                </select>
+              </div>
+              
+              <div>
+                <label className="block text-slate-300 mb-2">Project Details</label>
+                <textarea 
+                  name="details"
+                  placeholder="Tell us about your vision, goals, and requirements..."
+                  value={formData.details}
+                  onChange={handleChange}
+                  rows={4}
+                  className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                  required
+                ></textarea>
+              </div>
+              
+              <motion.button 
+                type="submit"
+                className="w-full py-4 px-6 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl font-bold text-lg hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Send Message
+              </motion.button>
+            </form>
+          </motion.div>
+          
+          {/* Right Column - Info & Contact */}
+          <div className="space-y-8">
+            {/* Why Partner With Axegen */}
+            <motion.div 
+              className="bg-slate-800/50 backdrop-blur-lg rounded-2xl border border-slate-700/50 p-8 shadow-2xl"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+            >
+              <h2 className="text-2xl font-bold mb-6 text-cyan-400">Why Partner With Axegen?</h2>
+              
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <div className="bg-cyan-900/50 p-3 rounded-lg mr-4">
+                    <span className="text-cyan-400 font-bold text-xl">5+</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-1">Years of Excellence</h3>
+                    <p className="text-slate-300">Proven track record in delivering high-impact digital solutions</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="bg-cyan-900/50 p-3 rounded-lg mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-1">Modern Technology Stack</h3>
+                    <p className="text-slate-300">Latest frameworks and tools for optimal performance</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="bg-cyan-900/50 p-3 rounded-lg mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-1">End-to-End Solutions</h3>
+                    <p className="text-slate-300">From concept to launch and beyond</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+            
+            {/* Prefer Direct Contact */}
+            <motion.div 
+              className="bg-slate-800/50 backdrop-blur-lg rounded-2xl border border-slate-700/50 p-8 shadow-2xl"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+            >
+              <h2 className="text-2xl font-bold mb-4 text-cyan-400">Prefer Direct Contact?</h2>
+              <p className="text-slate-300 mb-6">Let's schedule a call to discuss your project in detail</p>
+              
+              <div className="flex flex-col sm:flex-row items-center gap-6">
+                <div className="flex-1">
+                  <div className="bg-gradient-to-r from-cyan-700/30 to-blue-700/30 p-4 rounded-xl border border-cyan-500/30">
+                    <div className="flex items-center">
+                      <div className="bg-cyan-600/20 p-3 rounded-lg mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
                       </div>
-                    </div>
-                    
-                    <div className="flex items-start space-x-4">
-                      <div className="w-2 h-2 bg-accent rounded-full mt-3 glow-purple" />
                       <div>
-                        <h4 className="font-semibold text-lg">Modern Technology Stack</h4>
-                        <p className="text-muted-foreground">Latest frameworks and tools for optimal performance</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start space-x-4">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-3 glow-cyan" />
-                      <div>
-                        <h4 className="font-semibold text-lg">End-to-End Solutions</h4>
-                        <p className="text-muted-foreground">From concept to launch and beyond</p>
+                        <h3 className="font-bold text-lg">Schedule a Call</h3>
+                        <p className="text-slate-300 text-sm">Available 9AM-5PM EST</p>
                       </div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-              
-              {/* Contact Methods */}
-              <Card className="glass-strong border-primary/20">
-                <CardContent className="p-8">
-                  <h3 className="text-xl font-bold mb-6 text-gradient-cyan">Get In Touch</h3>
-                  
-                  <div className="space-y-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center glow-cyan">
-                        <span className="text-primary">📧</span>
-                      </div>
-                      <div>
-                        <div className="font-medium">Email</div>
-                        <div className="text-muted-foreground">hello@axegen.dev</div>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center space-x-4">
-                      <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center glow-cyan">
-                        <span className="text-primary">📞</span>
-                      </div>
-                      <div>
-                        <div className="font-medium">Phone</div>
-                        <div className="text-muted-foreground">+1 (555) 123-4567</div>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center space-x-4">
-                      <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center glow-cyan">
-                        <span className="text-primary">📍</span>
-                      </div>
-                      <div>
-                        <div className="font-medium">Location</div>
-                        <div className="text-muted-foreground">San Francisco, CA</div>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              {/* Schedule Call */}
-              <Card className="glass-strong border-accent/20">
-                <CardContent className="p-8 text-center">
-                  <h3 className="text-xl font-bold mb-4">Prefer a Direct Call?</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Let&apos;s schedule a call to discuss your project in detail
-                  </p>
-                  
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="border-accent/30 text-foreground hover:bg-accent/10 hover:border-accent transition-all duration-300"
-                  >
-                    Schedule a Call 📞
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
+                </div>
+                
+                <motion.button 
+                  className="px-6 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl font-bold hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 flex items-center"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  Book Now
+                </motion.button>
+              </div>
+            </motion.div>
           </div>
         </div>
-      </section>
-      
-      <Footer />
+      </div>
+
+      {/* Decorative elements */}
+      <div className="fixed top-20 right-10 w-40 h-40 rounded-full bg-cyan-500/10 blur-3xl -z-10"></div>
+      <div className="fixed bottom-20 left-10 w-60 h-60 rounded-full bg-blue-500/10 blur-3xl -z-10"></div>
+      <div className="fixed top-1/3 left-1/4 w-32 h-32 rounded-full bg-purple-500/10 blur-3xl -z-10"></div>
     </div>
   );
 };
 
-// Also create the component for use in other pages
-const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    project: '',
-    message: ''
-  });
-  const { toast } = useToast();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Message Sent! 🚀",
-      description: "We'll get back to you within 24 hours to discuss your project.",
-    });
-    setFormData({ name: '', email: '', project: '', message: '' });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
-
-  return (
-    <section className="py-24 px-6 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-      </div>
-      
-      <div className="container mx-auto max-w-7xl relative z-10">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            Ready to <span className="text-gradient-accent">Collaborate?</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Let&apos;s discuss your project and create something extraordinary together
-          </p>
-        </div>
-        
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Contact Form */}
-          <Card className="glass-strong border-primary/20 animate-slide-in-left">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-bold mb-6 text-gradient-cyan">Start Your Project</h3>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Name</label>
-                    <Input
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="glass border-primary/30 focus:border-primary"
-                      placeholder="Your name"
-                      required
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Email</label>
-                    <Input
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="glass border-primary/30 focus:border-primary"
-                      placeholder="your@email.com"
-                      required
-                    />
-                  </div>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium mb-2">Project Type</label>
-                  <Input
-                    name="project"
-                    value={formData.project}
-                    onChange={handleChange}
-                    className="glass border-primary/30 focus:border-primary"
-                    placeholder="Website, App, CMS, Marketing..."
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium mb-2">Project Details</label>
-                  <Textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="glass border-primary/30 focus:border-primary min-h-32"
-                    placeholder="Tell us about your vision, goals, and requirements..."
-                    required
-                  />
-                </div>
-                
-                <Button 
-                  type="submit" 
-                  size="lg" 
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground glow-cyan transition-all duration-300 hover:scale-105"
-                >
-                  Send Message 🚀
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
-          
-          {/* Contact Info & CTA */}
-          <div className="space-y-8 animate-scale-in" style={{ animationDelay: '0.3s' }}>
-            {/* Why Choose Us */}
-            <Card className="glass-strong border-accent/20 glow-purple">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-6 text-gradient-accent">Why Partner With Axegen?</h3>
-                
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-3 glow-cyan" />
-                    <div>
-                      <h4 className="font-semibold text-lg">5+ Years of Excellence</h4>
-                      <p className="text-muted-foreground">Proven track record in delivering high-impact digital solutions</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    <div className="w-2 h-2 bg-accent rounded-full mt-3 glow-purple" />
-                    <div>
-                      <h4 className="font-semibold text-lg">Modern Technology Stack</h4>
-                      <p className="text-muted-foreground">Latest frameworks and tools for optimal performance</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-3 glow-cyan" />
-                    <div>
-                      <h4 className="font-semibold text-lg">End-to-End Solutions</h4>
-                      <p className="text-muted-foreground">From concept to launch and beyond</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            {/* Quick Contact */}
-            <Card className="glass-strong border-primary/20">
-              <CardContent className="p-8 text-center">
-                <h3 className="text-xl font-bold mb-4">Prefer Direct Contact?</h3>
-                <p className="text-muted-foreground mb-6">
-                  Let&apos;s schedule a call to discuss your project in detail
-                </p>
-                
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="border-primary/30 text-foreground hover:bg-primary/10 hover:border-primary transition-all duration-300"
-                >
-                  Schedule a Call 📞
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default Contact;
-export { ContactPage };
+export default CollaborationPage;

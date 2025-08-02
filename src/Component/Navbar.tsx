@@ -72,7 +72,7 @@ const Navbar = () => {
           
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-foreground"
+            className="md:hidden text-[#2892FF]"
             onClick={() => setIsOpen(!isOpen)}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -87,7 +87,16 @@ const Navbar = () => {
         
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4 space-y-4 glass-strong">
+          <div className="md:hidden py-4 space-y-4  ">
+            <Link 
+              href="/" 
+              className={`block transition-colors duration-300 ${
+                isActive('/services') ? 'text-primary' : 'text-muted-foreground hover:text-primary'
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              Home
+            </Link>
             <Link 
               href="/services" 
               className={`block transition-colors duration-300 ${
