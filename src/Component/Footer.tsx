@@ -1,3 +1,4 @@
+import { Facebook, Github, Instagram, Linkedin } from "lucide-react";
 import Link from "next/link";
 
  
@@ -23,17 +24,17 @@ const Footer = () => {
             
             {/* Social Links */}
             <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors duration-300 glow-cyan">
-                <span className="text-primary">📧</span>
+              <a href="#" className="w-12 h-12 bg-primary-10 rounded-full flex items-center justify-center hover:bg-primary-20 transition-colors duration-300 glow-cyan">
+                <span className="text-primary"><Linkedin /></span>
               </a>
-              <a href="#" className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors duration-300 glow-cyan">
-                <span className="text-primary">🐦</span>
+              <a href="#" className="w-12 h-12 bg-primary-10 rounded-full flex items-center justify-center hover:bg-primary-20 transition-colors duration-300 glow-cyan">
+                <span className="text-primary"><Github /></span>
               </a>
-              <a href="#" className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors duration-300 glow-cyan">
-                <span className="text-primary">💼</span>
+              <a href="#" className="w-12 h-12 bg-primary-10 rounded-full flex items-center justify-center hover:bg-primary-20 transition-colors duration-300 glow-cyan">
+                <span className="text-primary "><Facebook /></span>
               </a>
-              <a href="#" className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors duration-300 glow-cyan">
-                <span className="text-primary">📱</span>
+              <a href="#" className="w-12 h-12 bg-primary-10 rounded-full flex items-center justify-center hover:bg-primary-20 transition-colors duration-300 glow-cyan">
+                <span className="text-primary"><Instagram /></span>
               </a>
             </div>
           </div>
