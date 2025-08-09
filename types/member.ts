@@ -6,5 +6,5 @@ interface Member {
   contactText: string;
   avatarUrl: string;
   iconUrl: string;
-  showBehindGradient:boolean;
+  
 }
