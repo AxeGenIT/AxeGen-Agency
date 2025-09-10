@@ -3,7 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import ProfileCard from './UI/DevCard/ProfileCard';
-import { teammembers } from '@/utils/member_dev';
+import { teammembers } from '@/data/member_dev';
 
 const TeamMembers = () => {
   const ref = useRef(null);

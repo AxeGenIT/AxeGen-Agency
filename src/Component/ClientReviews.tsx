@@ -12,7 +12,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
 import ReviewCard from "@/Component/UI/ReviewCard";
-import { reviews } from "@/utils/data";
+import { reviews } from "@/data/reviews";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
