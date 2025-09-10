@@ -36,33 +36,7 @@ const TeamMembers = () => {
     }
   };
 
-  const teamMembers = [
-    {
-      id: 1,
-      name: "Alex Morgan",
-      position: "Lead Developer",
-      description: "Full-stack developer with 8+ years of experience in building scalable web applications."
-    },
-    {
-      id: 2,
-      name: "Taylor Chen",
-      position: "UX/UI Designer",
-      description: "Creative designer focused on creating intuitive and beautiful user experiences."
-    },
-    {
-      id: 3,
-      name: "Jordan Williams",
-      position: "Project Manager",
-      description: "Ensures projects are delivered on time and exceed client expectations."
-    },
-    {
-      id: 4,
-      name: "Casey Rodriguez",
-      position: "DevOps Engineer",
-      description: "Infrastructure expert focused on seamless deployments and system reliability."
-    }
-  ];
-
+  
   return (
     <section 
       ref={ref}
@@ -93,7 +67,7 @@ const TeamMembers = () => {
           />
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center place-content-center align-middle">
           {teammembers.map((member, index) => (
               <ProfileCard key={index}  name={member.name} title={member.title} iconUrl={member.iconUrl} handle={member.handle} status={member.status} contactText={member.contactText} avatarUrl={member.avatarUrl} showBehindGradient={false}/>
           ))}

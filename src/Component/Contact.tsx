@@ -11,26 +11,84 @@ const CollaborationPage = () => {
     projectType: '',
     details: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ success: boolean; message: string } | null>(null);
+  const [showCalendly, setShowCalendly] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Form submitted successfully! We\'ll be in touch soon.');
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      projectType: '',
-      details: ''
-    });
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      
+      if (response.ok) {
+        setSubmitStatus({ success: true, message: 'Message sent successfully! We\'ll be in touch soon.' });
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          projectType: '',
+          details: ''
+        });
+      } else {
+        setSubmitStatus({ success: false, message: result.message || 'Failed to send message. Please try again.' });
+      }
+    } catch (error) {
+      setSubmitStatus({ success: false, message: 'Network error. Please try again.' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const openCalendly = () => {
+    setShowCalendly(true);
+  };
+
+  const closeCalendly = () => {
+    setShowCalendly(false);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-indigo-950 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-indigo-950 text-white relative">
+      {/* Calendly Popup */}
+      {showCalendly && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-slate-800 rounded-2xl w-full max-w-2xl h-[80vh] relative">
+            <button 
+              onClick={closeCalendly}
+              className="absolute top-4 right-4 text-slate-300 hover:text-white z-10"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <div className="h-full w-full">
+              <iframe 
+                src="https://calendly.com/axegenit/30min" 
+                className="w-full h-full rounded-2xl"
+                frameBorder="0"
+                title="Schedule a Meeting"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <header className="py-12 px-4 max-w-7xl mx-auto text-center">
         <motion.h1 
@@ -76,6 +134,7 @@ const CollaborationPage = () => {
                       onChange={handleChange}
                       className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
                   <div className="flex-1">
@@ -87,6 +146,7 @@ const CollaborationPage = () => {
                       onChange={handleChange}
                       className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
                 </div>
@@ -102,6 +162,7 @@ const CollaborationPage = () => {
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
               
@@ -113,6 +174,7 @@ const CollaborationPage = () => {
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   required
+                  disabled={isSubmitting}
                 >
                   <option value="">Select project type</option>
                   <option value="website">Website</option>
@@ -133,17 +195,35 @@ const CollaborationPage = () => {
                   rows={4}
                   className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   required
+                  disabled={isSubmitting}
                 ></textarea>
               </div>
               
               <motion.button 
                 type="submit"
-                className="w-full py-4 px-6 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl font-bold text-lg hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40"
+                className="w-full py-4 px-6 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl font-bold text-lg hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 flex items-center justify-center"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                disabled={isSubmitting}
               >
-                Send Message
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Sending...
+                  </>
+                ) : (
+                  'Send Message'
+                )}
               </motion.button>
+              
+              {submitStatus && (
+                <div className={`mt-4 p-3 rounded-lg text-center ${submitStatus.success ? 'bg-green-900/30 text-green-400' : 'bg-red-900/30 text-red-400'}`}>
+                  {submitStatus.message}
+                </div>
+              )}
             </form>
           </motion.div>
           
@@ -226,6 +306,7 @@ const CollaborationPage = () => {
                   className="px-6 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl font-bold hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 flex items-center"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={openCalendly}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -242,6 +323,8 @@ const CollaborationPage = () => {
       <div className="fixed top-20 right-10 w-40 h-40 rounded-full bg-cyan-500/10 blur-3xl -z-10"></div>
       <div className="fixed bottom-20 left-10 w-60 h-60 rounded-full bg-blue-500/10 blur-3xl -z-10"></div>
       <div className="fixed top-1/3 left-1/4 w-32 h-32 rounded-full bg-purple-500/10 blur-3xl -z-10"></div>
+      
+      {/* Footer */}
     </div>
   );
 };
