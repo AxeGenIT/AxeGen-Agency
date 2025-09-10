@@ -39,7 +39,6 @@ const ClientReviews = () => {
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
         type: "spring" as const,
         damping: 12,
         stiffness: 100,
