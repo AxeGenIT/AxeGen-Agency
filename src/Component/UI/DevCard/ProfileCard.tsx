@@ -275,6 +275,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
               className="avatar"
               src={avatarUrl}
               alt={`${name || "User"} avatar`}
+              width={800}
+              height={800}
               loading="lazy"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
@@ -288,6 +290,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                     <Image
                       src={miniAvatarUrl || avatarUrl}
                       alt={`${name || "User"} mini avatar`}
+                      width={800}
+                      height={800}
                       loading="lazy"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
