@@ -1,6 +1,5 @@
 "use client";
-import { motion, useInView } from "framer-motion";
- 
+import { motion, useInView, Variants } from "framer-motion";
 import { useRef } from "react";
 import ProjectCard from "./ProjectCard/ProjectCard";
 import { projects } from "@/data/projects";
@@ -9,8 +8,8 @@ const Portfolio = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  // Animation variants
-  const containerVariants = {
+  // Animation variants with proper TypeScript types
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -21,7 +20,7 @@ const Portfolio = () => {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
@@ -52,13 +51,13 @@ const Portfolio = () => {
             className="text-3xl md:text-4xl font-bold mb-4"
             variants={itemVariants}
           >
-            Meet Our <span className="text-cyan-400">Expert Team</span>
+            Our <span className="text-cyan-400">Projects</span>
           </motion.h2>
           <motion.p
             className="text-lg text-slate-300 max-w-2xl mx-auto"
             variants={itemVariants}
           >
-            The talented professionals behind our success
+            Explore our portfolio of innovative web applications
           </motion.p>
           <motion.div
             className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto mt-6 rounded-full"
@@ -66,12 +65,14 @@ const Portfolio = () => {
           />
         </motion.div>
 
-        <div className="">
-           {
-            projects.map((project, index) => {
-              return <ProjectCard key={index} project={project}/>
-            })
-           }
+        <div className="space-y-32">
+          {projects.map((project, index) => (
+            <ProjectCard 
+              key={project.projectName} 
+              project={project} 
+              index={index} 
+            />
+          ))}
         </div>
       </div>
     </section>
