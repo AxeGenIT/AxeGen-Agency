@@ -102,7 +102,7 @@ const Hero = () => {
           className="flex flex-col sm:flex-row gap-6 justify-center animate-slide-up"
           style={{ animationDelay: "0.6s" }}
         >
-          <Link href="/contact">
+          <Link href="#contact">
             <Button
               size="lg"
               className="group relative overflow-hidden bg-primary hover:button-gradient-project hover:bg-primary/90 text-primary-foreground px-12 py-6 text-lg font-semibold glow-cyan transition-all duration-300 hover:scale-105 rounded-2xl"
@@ -112,7 +112,7 @@ const Hero = () => {
             </Button>
           </Link>
 
-          <Link href="/portfolio">
+          <Link href="#portfolio">
             <Button
               size="lg"
               variant="outline"
