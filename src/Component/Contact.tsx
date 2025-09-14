@@ -82,7 +82,10 @@ const CollaborationPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-indigo-950 text-white relative">
+    <div
+      id="contact"
+      className="min-h-screen bg-gradient-to-br from-slate-900 to-indigo-950 text-white relative"
+    >
       {/* Calendly Popup */}
       {showCalendly && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">

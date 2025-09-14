@@ -37,6 +37,7 @@ const Portfolio = () => {
 
   return (
     <section
+      id="portfolio"
       ref={ref}
       className="py-20 px-4 bg-gradient-to-br from-slate-900 to-indigo-950 text-white"
     >
@@ -67,10 +68,10 @@ const Portfolio = () => {
 
         <div className="space-y-32">
           {projects.map((project, index) => (
-            <ProjectCard 
-              key={project.projectName} 
-              project={project} 
-              index={index} 
+            <ProjectCard
+              key={project.projectName}
+              project={project}
+              index={index}
             />
           ))}
         </div>
