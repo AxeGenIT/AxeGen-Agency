@@ -1,4 +1,4 @@
-interface Member {
+export interface Member {
   name: string;
   title: string;
   handle: string;
@@ -8,3 +8,4 @@ interface Member {
   iconUrl: string;
   
 }
+

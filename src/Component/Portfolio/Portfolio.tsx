@@ -1,16 +1,15 @@
-// app/components/TeamMembers.tsx
 "use client";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, Variants } from "framer-motion";
 import { useRef } from "react";
-import ProfileCard from "./UI/DevCard/ProfileCard";
-import { teammembers } from "@/data/member_dev";
+import ProjectCard from "./ProjectCard/ProjectCard";
+import { projects } from "@/data/projects";
 
-const TeamMembers = () => {
+const Portfolio = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  // Animation variants
-  const containerVariants = {
+  // Animation variants with proper TypeScript types
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -21,13 +20,15 @@ const TeamMembers = () => {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring" as const,
+        duration: 0.6,
+        ease: "easeOut",
+        type: "spring",
         damping: 12,
         stiffness: 100,
       },
@@ -50,13 +51,13 @@ const TeamMembers = () => {
             className="text-3xl md:text-4xl font-bold mb-4"
             variants={itemVariants}
           >
-            Meet Our <span className="text-cyan-400">Expert Team</span>
+            Our <span className="text-cyan-400">Projects</span>
           </motion.h2>
           <motion.p
             className="text-lg text-slate-300 max-w-2xl mx-auto"
             variants={itemVariants}
           >
-            The talented professionals behind our success
+            Explore our portfolio of innovative web applications
           </motion.p>
           <motion.div
             className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto mt-6 rounded-full"
@@ -64,18 +65,12 @@ const TeamMembers = () => {
           />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center place-content-center align-middle">
-          {teammembers.map((member, index) => (
-            <ProfileCard
-              key={index}
-              name={member.name}
-              title={member.title}
-              iconUrl={member.iconUrl}
-              handle={member.handle}
-              status={member.status}
-              contactText={member.contactText}
-              avatarUrl={member.avatarUrl}
-              showBehindGradient={false}
+        <div className="space-y-32">
+          {projects.map((project, index) => (
+            <ProjectCard 
+              key={project.projectName} 
+              project={project} 
+              index={index} 
             />
           ))}
         </div>
@@ -84,4 +79,4 @@ const TeamMembers = () => {
   );
 };
 
-export default TeamMembers;
+export default Portfolio;

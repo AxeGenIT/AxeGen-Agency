@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useRef } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import { Review } from "@/utils/data";
+import { Review } from "@/data/reviews";
 import { Rating } from "@smastrom/react-rating";
 import { Check, ChevronRight } from "lucide-react";
 

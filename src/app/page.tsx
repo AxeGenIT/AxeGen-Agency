@@ -1,7 +1,7 @@
 import ClientReviews from "@/Component/ClientReviews";
 import CollaborationPage from "@/Component/Contact";
 import Hero from "@/Component/Hero";
-import Portfolio from "@/Component/Portfolio";
+import Portfolio from "@/Component/Portfolio/Portfolio";
 import Services from "@/Component/Services";
 import TeamMembers from "@/Component/TeamMember";
  

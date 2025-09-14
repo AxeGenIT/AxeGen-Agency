@@ -1,6 +1,7 @@
-'use client'
+"use client";
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import "./Compnent/ProfileCard.css";
+import Image from "next/image";
 
 interface ProfileCardProps {
   avatarUrl: string;
@@ -45,7 +46,7 @@ const adjust = (
   fromMin: number,
   fromMax: number,
   toMin: number,
-  toMax: number
+  toMax: number,
 ): number =>
   round(toMin + ((toMax - toMin) * (value - fromMin)) / (fromMax - fromMin));
 
@@ -82,7 +83,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       offsetX: number,
       offsetY: number,
       card: HTMLElement,
-      wrap: HTMLElement
+      wrap: HTMLElement,
     ) => {
       const width = card.clientWidth;
       const height = card.clientHeight;
@@ -115,7 +116,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       startX: number,
       startY: number,
       card: HTMLElement,
-      wrap: HTMLElement
+      wrap: HTMLElement,
     ) => {
       const startTime = performance.now();
       const targetX = wrap.clientWidth / 2;
@@ -163,10 +164,10 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
         event.clientX - rect.left,
         event.clientY - rect.top,
         card,
-        wrap
+        wrap,
       );
     },
-    [animationHandlers]
+    [animationHandlers],
   );
 
   const handlePointerEnter = useCallback(() => {
@@ -192,12 +193,12 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
         event.offsetX,
         event.offsetY,
         card,
-        wrap
+        wrap,
       );
       wrap.classList.remove("active");
       card.classList.remove("active");
     },
-    [animationHandlers]
+    [animationHandlers],
   );
 
   useEffect(() => {
@@ -225,7 +226,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       initialX,
       initialY,
       card,
-      wrap
+      wrap,
     );
 
     return () => {
@@ -252,7 +253,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
           : "none",
         "--inner-gradient": innerGradient ?? DEFAULT_INNER_GRADIENT,
       }) as React.CSSProperties,
-    [iconUrl, grainUrl, showBehindGradient, behindGradient, innerGradient]
+    [iconUrl, grainUrl, showBehindGradient, behindGradient, innerGradient],
   );
 
   const handleContactClick = useCallback(() => {
@@ -270,10 +271,12 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
           <div className="pc-shine" />
           <div className="pc-glare" />
           <div className="pc-content pc-avatar-content">
-            <img
+            <Image
               className="avatar"
               src={avatarUrl}
               alt={`${name || "User"} avatar`}
+              width={800}
+              height={800}
               loading="lazy"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
@@ -284,9 +287,11 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
               <div className="pc-user-info">
                 <div className="pc-user-details">
                   <div className="pc-mini-avatar">
-                    <img
+                    <Image
                       src={miniAvatarUrl || avatarUrl}
                       alt={`${name || "User"} mini avatar`}
+                      width={800}
+                      height={800}
                       loading="lazy"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
